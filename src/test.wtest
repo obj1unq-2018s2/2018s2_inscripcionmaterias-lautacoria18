@@ -1,0 +1,58 @@
+import example.*
+import materia.*
+import carrera.*
+
+describe "inscripciones" {
+	
+	//Carreras
+	
+	var tpi = new Carrera()
+	var biotecnologia = new Carrera()
+	
+	
+	//Materias
+	var elementosDeProgramacion = new Materia(carrera= tpi, cantidadDeCreditosQueDa= 20, cupoMaximo= 40, curso= [], listaDeEspera= [], estudiantesInscriptos= [])
+	var intro  = new MateriaConCorrelativas(carrera= tpi, cantidadDeCreditosQueDa= 30, cupoMaximo= 40,
+		curso= [], listaDeEspera= [], materiasCorrelativas=[elementosDeProgramacion], estudiantesInscriptos= []
+	)
+	var objetos1 = new MateriaConAnioAnterior(carrera= tpi, cantidadDeCreditosQueDa= 40, cupoMaximo= 45,
+		curso= [], listaDeEspera= [], materiasDeAniosAnteriores=[elementosDeProgramacion, intro], estudiantesInscriptos= [])
+		
+	var redes = new MateriaConCreditos(carrera= tpi, cantidadDeCreditosQueDa= 50, cupoMaximo= 50,
+		curso= [], listaDeEspera= [], creditosQueNecesita=100, estudiantesInscriptos= [])
+		
+	//Alumnos
+	
+	var santos = new Estudiante(carrerasCursando=[tpi, biotecnologia], materiasAprobadas=[elementosDeProgramacion], materiasInscripto=[], creditos=20)
+	
+	
+	test "alumnoInscribe" {
+		
+		
+		assert.equals(true, santos.puedeCursarMateria(intro))
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
