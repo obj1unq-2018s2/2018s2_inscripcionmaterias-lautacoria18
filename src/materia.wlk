@@ -22,7 +22,7 @@ class Materia {
 	 
 	 	method estudiantesInscriptosDeUnaMateria() {
 		
-		return {	self.estudiantesInscriptos()	}
+		return {	self.curso()	}
 		
 		
 	}
@@ -62,6 +62,7 @@ class MateriaConAnioAnterior inherits Materia {
 }
 
 class MateriaAprobada inherits Materia{
+	
 	
 	var property nota
 	
