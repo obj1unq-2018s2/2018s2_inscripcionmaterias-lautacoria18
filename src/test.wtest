@@ -6,15 +6,22 @@ describe "inscripciones" {
 	
 	//Carreras
 	
-	var tpi = new Carrera(materias=[])
+	var mate = new Materia()
+	var lea = new Materia()
+	var tpi = new Carrera(materias=[lea, mate])
 	var biotecnologia = new Carrera()
 	
 	
 	//Materias
+	var lamponne = new Estudiante()
+	var ravenna = new Estudiante()
 	
-	var elementosDeProgramacion = new Materia(carrera= tpi, cantidadDeCreditosQueDa= 20, cupoMaximo= 40, curso= [], listaDeEspera= [], estudiantesInscriptos= [])
 	
-		var redes = new MateriaConCreditos(carrera= tpi, cantidadDeCreditosQueDa= 50, cupoMaximo= 50,
+	var elementosDeProgramacion = new Materia(carrera= tpi, cantidadDeCreditosQueDa= 20, cupoMaximo= 40, curso= [], listaDeEspera= [ravenna], estudiantesInscriptos= [])
+	
+	var orga = new Materia(carrera= tpi, cantidadDeCreditosQueDa= 20, cupoMaximo= 1, curso= [lamponne], listaDeEspera= [ravenna], estudiantesInscriptos= [])
+	
+	var redes = new MateriaConCreditos(carrera= tpi, cantidadDeCreditosQueDa= 50, cupoMaximo= 50,
 		curso= [], listaDeEspera= [], creditosQueNecesita=100, estudiantesInscriptos= [])
 	
 	var intro  = new MateriaConCorrelativas(carrera= tpi, cantidadDeCreditosQueDa= 30, cupoMaximo= 40,
@@ -28,14 +35,88 @@ describe "inscripciones" {
 	//Alumnos
 	
 	var santos = new Estudiante(carrerasCursando=[tpi, biotecnologia], materiasAprobadas=[elementosDeProgramacion], materiasInscripto=[], creditos=500)
+	var medina = new Estudiante(carrerasCursando=[tpi, biotecnologia], materiasAprobadas=[], materiasInscripto=[lea, mate], creditos=500)
 	
+	//Test del punto 1
 	
-	test "alumnoInscribe" {
+		test "puedecursar" {
+			
+			
+			assert.equals(true, santos.puedeCursarMateria(intro))
+			
+		}
 		
-		
-		assert.equals(true, santos.puedeCursarMateria([intro]))
+		//assert.equals(true, santos.puedeCursarMateria([intro]))
 		//assert.equals(true, intro.puedeCursarse(santos))
+		test "aproboMateria" {
+		//Test del punto 2
+		santos.aproboMateria(intro)
+		assert.equals(#{elementosDeProgramacion, intro}, santos.materiasQueAprobo())
 		
+		//Test del punto 3
+		}
+		test "inscribe a un curso"{
+		medina.inscribirseACursoDeMateria(elementosDeProgramacion)
+		//intro.inscribirACurso(santos)
+		assert.equals([medina], elementosDeProgramacion.curso())
+		}
+		
+		//test del punto 3 plimo
+		test"quedan en lista de espera"{
+			
+			medina.inscribirseACursoDeMateria(orga)
+			assert.equals([ravenna, medina], orga.listaDeEspera())
+			
+		}
+		
+		
+		//Test del punto 4
+		test "abandona" {
+			medina.inscribirseACursoDeMateria(elementosDeProgramacion)
+			medina.abandonarMateria(elementosDeProgramacion)
+			assert.equals([ravenna], elementosDeProgramacion.curso())	
+			
+		}
+		//Test del punto 4 plimo
+		
+		test"abandona y se suma otro de la lista"{
+			
+			lamponne.abandonarMateria(orga)
+			//orga.curso().add(orga.listaDeEspera().head())
+			assert.equals([ravenna], orga.curso())
+			assert.equals([], orga.listaDeEspera())
+			
+			
+		}
+		
+		//Test del punto 5
+		
+		test"inscriptos"{
+			assert.equals([lamponne], orga.estudiantesInscriptosDeUnaMateria())
+			
+			
+		}
+		
+		//Test del punto 5 parte2
+		test "estudiantesEnEspera"{
+			
+			assert.equals([ravenna], orga.estudiantesEnListaDeEspera())
+		}
+		
+		//Test del punto 6
+		test "materias que se puede inscribir"{
+			
+			assert.equals([lea, mate], tpi.materiasQueSePuedeInscribir(medina))
+			
+		}
+		
+		//Test del punto 6 parte 2
+		test "materias Que Esta inscripto"{
+			
+			assert.equals([lea, mate], tpi.materiasQueEstaInscripto(medina))
+			
+		}
+
 		
 	}
 	

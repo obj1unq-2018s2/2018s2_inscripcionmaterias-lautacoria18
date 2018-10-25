@@ -6,10 +6,11 @@ class Carrera {
 	
 	 method materiasQueSePuedeInscribir(alumno){
 	 	
-	 	 if (alumno.carrerasCursando().contains(self)) materias.filter{materia => materia.puedeCursarse(alumno)}
-	 	
-	 	
-	 }
+	 	 return if (alumno.carrerasCursando().contains(self)) materias.filter{materia => materia.puedeCursarse(alumno)}.asList()
+	 	 else{}
+	 	//if (alumno.carrerasCursando().contains(self))/ /
+	 	}
+	 
 	 
 	 method materiasQueEstaInscripto(alumno){
 	 	

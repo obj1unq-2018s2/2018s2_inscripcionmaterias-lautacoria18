@@ -12,7 +12,8 @@ class Estudiante {
 	
 	method puedeCursarMateria(materia){
 		
-		return carrerasCursando.contains(materia.carrera()) and not self.laTieneAprobada(materia) and not self.estaInscriptoEn(materia)
+		return  not self.laTieneAprobada(materia) and not self.estaInscriptoEn(materia)
+		//carrerasCursando.contains(materia.carrera()) and //
 		//self.esDeLaCarrera(materia) //
 		////return not(materiasAprobadas.contains(materia))and (materiasInscripto.contains(materia)) 
 					//			and carrerasCursando.contains(materia.carrera()) 
@@ -39,23 +40,33 @@ class Estudiante {
 		
 	}
 	
-	///////
+	///////Punto 2
 	
 	method aproboMateria(materiaAprobada) {
 		
-		materiasAprobadas.add(materiaAprobada).asSet()
+		materiasAprobadas.add(materiaAprobada)
 			
 	}
 	
+	method materiasQueAprobo(){
+		
+		return materiasAprobadas.asSet()
+		
+	}
+	
+	//Punto 3
+	
 	method inscribirseACursoDeMateria(materia) {
 		
-		if (materia.PuedeCursarse(self)) materia.inscribirACurso(self)
+		if (materia.puedeCursarse(self)) materia.inscribirACurso(self)
 	}
+	
+	//Punto 4
 	
 	method abandonarMateria(materia) {
 		
 		materia.curso().remove(self)
-		if (materia.listaDeEspera().size() > 0)	//AGREGAR NOT IS EMPTY!!!!!
+		if (not materia.listaDeEspera().isEmpty())	//AGREGAR NOT IS EMPTY!!!!!
 		materia.curso().add(materia.listaDeEspera().head())
 		materia.listaDeEspera().remove(materia.listaDeEspera().head())
 		

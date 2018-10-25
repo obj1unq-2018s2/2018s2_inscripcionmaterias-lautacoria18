@@ -8,7 +8,7 @@ class Materia {
 	var property curso
 	var property listaDeEspera
 	var property estudiantesInscriptos
-	method cantAlumnosCursando() {return curso.lenght()}
+	method cantAlumnosCursando() {return curso.size()}
 	
 	// method cantAlumnosEnCurso(){return curso.cantAlumnosCursando()}
 		
@@ -22,14 +22,14 @@ class Materia {
 	 
 	 	method estudiantesInscriptosDeUnaMateria() {
 		
-		return {	self.curso()	}
+		return 	curso	
 		
 		
 	}
 
 	method estudiantesEnListaDeEspera() {
 		
-		return { self.listaDeEspera()}
+		return listaDeEspera
 		
 		
 	}	
