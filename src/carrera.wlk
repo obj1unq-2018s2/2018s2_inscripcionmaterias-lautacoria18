@@ -8,7 +8,7 @@ class Carrera {
 	 	
 	 	 return if (alumno.carrerasCursando().contains(self)) materias.filter{materia => materia.puedeCursarse(alumno)}.asList()
 	 	 else{}
-	 	//if (alumno.carrerasCursando().contains(self))/ /
+
 	 	}
 	 
 	 

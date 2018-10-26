@@ -37,6 +37,25 @@ describe "inscripciones" {
 	var santos = new Estudiante(carrerasCursando=[tpi, biotecnologia], materiasAprobadas=[elementosDeProgramacion], materiasInscripto=[], creditos=500)
 	var medina = new Estudiante(carrerasCursando=[tpi, biotecnologia], materiasAprobadas=[], materiasInscripto=[lea, mate], creditos=500)
 	
+	//Test PUNTO 7 A
+	
+	test "Le falta correlativa"{
+		
+		assert.notThat(medina.puedeCursarMateria(intro))
+		
+	}
+	
+	
+	//Test punto 7B
+			test" queda en lista de espera "{
+			
+			medina.inscribirseACursoDeMateria(orga)
+			assert.equals([ravenna, medina], orga.listaDeEspera())
+			
+		}
+	
+	
+	
 	//Test del punto 1
 	
 		test "puedecursar" {
@@ -46,8 +65,6 @@ describe "inscripciones" {
 			
 		}
 		
-		//assert.equals(true, santos.puedeCursarMateria([intro]))
-		//assert.equals(true, intro.puedeCursarse(santos))
 		test "aproboMateria" {
 		//Test del punto 2
 		santos.aproboMateria(intro)

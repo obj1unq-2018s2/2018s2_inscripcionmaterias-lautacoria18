@@ -8,17 +8,18 @@ class Estudiante {
 	
 	
 	
-	
+	method promedioDeEstudiante(){
+		
+		return materiasAprobadas.sum { materia => materia.nota() } / materiasAprobadas.size()
+		
+		
+	}
 	
 	method puedeCursarMateria(materia){
 		
-		return  not self.laTieneAprobada(materia) and not self.estaInscriptoEn(materia)
-		//carrerasCursando.contains(materia.carrera()) and //
-		//self.esDeLaCarrera(materia) //
-		////return not(materiasAprobadas.contains(materia))and (materiasInscripto.contains(materia)) 
-					//			and carrerasCursando.contains(materia.carrera()) 
-						//		and materia.puedeCursarse(self)		
-		
+		return  not self.laTieneAprobada(materia) and not self.estaInscriptoEn(materia) and materia.puedeCursarse(self)	
+		and carrerasCursando.contains(materia.carrera())
+
 		
 	}
 	//Metodos adicionales
@@ -66,7 +67,7 @@ class Estudiante {
 	method abandonarMateria(materia) {
 		
 		materia.curso().remove(self)
-		if (not materia.listaDeEspera().isEmpty())	//AGREGAR NOT IS EMPTY!!!!!
+		if (not materia.listaDeEspera().isEmpty())
 		materia.curso().add(materia.listaDeEspera().head())
 		materia.listaDeEspera().remove(materia.listaDeEspera().head())
 		

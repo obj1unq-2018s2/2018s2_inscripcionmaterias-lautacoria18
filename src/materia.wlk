@@ -8,6 +8,7 @@ class Materia {
 	var property curso
 	var property listaDeEspera
 	var property estudiantesInscriptos
+
 	method cantAlumnosCursando() {return curso.size()}
 	
 	// method cantAlumnosEnCurso(){return curso.cantAlumnosCursando()}
@@ -31,19 +32,20 @@ class Materia {
 		
 		return listaDeEspera
 		
-		
 	}	
-	
 }
 
 class MateriaConCorrelativas inherits Materia {
 	
 		var property materiasCorrelativas
 	
-	override method puedeCursarse(alumno) { return alumno.materiasAprobadas().contains(materiasCorrelativas)
+	override method puedeCursarse(alumno) { return materiasCorrelativas.all{materia => alumno.materiasAprobadas().contains(materia)}
 
+		
 	}
+
 }
+
 
 class MateriaConCreditos inherits Materia {
 	
@@ -57,21 +59,24 @@ class MateriaConAnioAnterior inherits Materia {
 	
 		var property materiasDeAniosAnteriores
 	
-	override method puedeCursarse(alumno) { return alumno.materiasAprobadas().contains(materiasDeAniosAnteriores)
+override method puedeCursarse(alumno) { return materiasDeAniosAnteriores.all{materia => alumno.materiasAprobadas().contains(materia)}
 	}
 }
 
 class MateriaAprobada inherits Materia{
-	
-	
-	var property nota
-	
-//	method alumnoAproboLaMateria(alumno, materia) {
-		
-		
-//			return {alumno.materiasAprobadas().contains(materia) }		
-		
-//	}
-	
+		var property nota
+
 	
 }
+
+//Punto 8 BONUS
+class MateriaPorOrdenDeLlegada inherits Materia{
+	
+	
+	 method agregarAListaDeEspera(alumno){if (not self.cantAlumnosCursando() < cupoMaximo) listaDeEspera.add(alumno)
+	 							
+	 								
+	 	
+	 } 
+	}
+
